@@ -15,13 +15,13 @@ namespace ConsoleApp1
         {
             List<string> history = new List<string>();
             string input_1 = " ";
-            Menu(history, input_1);
+            Menu(history, input_1);  // <-- Shoot the user over to the Menu for interaction.
         }
 
-        public static void Menu(List<string> history, string input_1)
+        public static void Menu(List<string> history, string input_1) // Printing a Menu with Choices for the User
         {
             
-            int choiceID;
+            int choiceID; // <-- Saving the choice ID for a Switch Statement
             Console.WriteLine("Press Corresponding Key on your numpad: \n\n\n");
             Console.WriteLine(">> Perform a Calulation       >> 1 <<");
             Console.WriteLine(">> Print the History          >> 2 <<");
@@ -50,7 +50,7 @@ namespace ConsoleApp1
                     choiceID = 4;
                     break;
                 }
-            }
+            }  // <--- While no-key that we have assigned is pushed we just wait. Keys assigned are 1-3 numpad or numeric.
 
             switch (choiceID)
             {
@@ -69,7 +69,7 @@ namespace ConsoleApp1
                 case 3:
                     Quit();
                     break;
-            }
+            } // <---- Switch Statement with refrences to the Calculate and ListHistory Classes depending on choice.
 
 
 
