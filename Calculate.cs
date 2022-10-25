@@ -10,16 +10,26 @@ namespace ConsoleApp1
 
             try
             {
-                string value = new DataTable().Compute(input_1, null).ToString();       // Build a new string of the input made from user, after it being calculated by the Core.
-                Console.WriteLine(value);                                               // <--- Print the Calulated Value
+                string value = new DataTable().Compute(input_1, null).ToString(); 
+                
+                if (!string.IsNullOrWhiteSpace(value))                                                       // Build a new string of the input made from user, after it being calculated by the Core.
+                {
+                    Console.WriteLine("Sorry, we are not equipped to handle 0-division.\n" +
+                    "Taking you back to Main Menu\n");
+                    Thread.Sleep(1500);
+                    Program.Menu(history, input_1);
+                }
+
+                Console.Write("  =  " + value);                                               // <--- Print the Calulated Value
                 Console.WriteLine("\n\n\n");
                 history.Add(input_1 + " = " + value);                                   // <--- Add the Input from User and = Output to the history List
                 Program.Menu(history, null);
             }
-            catch (FormatException)
+            catch (DivideByZeroException)
             {
-                Console.WriteLine("Sorry, You've entered an invalid form of calculation.\n" +
-                            "Please use digits and operators. No letters or whitespace.\n\n");
+                Console.WriteLine("Sorry, we are not equipped to handle 0-division.\n" +
+                    "Taking you back to Main Menu\n");
+                Thread.Sleep(1500);
                 Program.Menu(history, input_1);
             }    
                  
