@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Data;
 
@@ -9,19 +10,19 @@ namespace ConsoleApp1
         public static void Quit()
         {
             Environment.Exit(200);
-        }// Quick and Simple Exit
+        }                                                                    // Quick and Simple Exit
 
-        static void Main(string[] args) // Main, we setup the globally used Variables like the List and Input that needs to be sent and handeled elsewhere
+        static void Main(string[] args)                                                                 // Main, we setup the globally used Variables like the List and Input that needs to be sent and handeled elsewhere
         {
             List<string> history = new List<string>();
             string input_1 = " ";
-            Menu(history, input_1);  // <-- Shoot the user over to the Menu for interaction.
+            Menu(history, input_1);                                                                     // <-- Shoot the user over to the Menu for interaction.
         }
 
-        public static void Menu(List<string> history, string input_1) // Printing a Menu with Choices for the User
+        public static void Menu(List<string> history, string input_1)                                   // Printing a Menu with Choices for the User
         {
             
-            int choiceID; // <-- Saving the choice ID for a Switch Statement
+            int choiceID;                                                                               // <-- Saving the choice ID for a Switch Statement
             Console.WriteLine("Press Corresponding Key on your numpad: \n\n\n");
             Console.WriteLine(">> Perform a Calulation       >> 1 <<");
             Console.WriteLine(">> Print the History          >> 2 <<");
@@ -45,12 +46,8 @@ namespace ConsoleApp1
                     choiceID = 3;
                     break;
                 }
-                else if (keypress.Key == ConsoleKey.D4)
-                {
-                    choiceID = 4;
-                    break;
-                }
-            }  // <--- While no-key that we have assigned is pushed we just wait. Keys assigned are 1-3 numpad or numeric.
+                
+            }                                                                             // <--- While no-key that we have assigned is pushed we just wait. Keys assigned are 1-3 numpad or numeric.
 
             switch (choiceID)
             {
@@ -58,8 +55,16 @@ namespace ConsoleApp1
                     Console.Clear();
                     Console.WriteLine("Enter a Calculation tex.(123*24-2)!");
                     input_1 = Console.ReadLine();
-                    Calculate.DoCalculate(history, input_1);
+
+                    if (input_1.All(x => char.IsDigit(x) || char.IsWhiteSpace(x) || char.IsLetter(x)))    // <--- Check for invalid input, ensuring we only capture digits and operands.
+                    {
+                        Console.WriteLine("Sorry, You've entered an invalid form of calculation.\n" +
+                            "Please use digits and operators. No letters or whitespace.\n\n");
+                        Menu(history, input_1);
+                    }
+                    else { Calculate.DoCalculate(history, input_1);  }                      // <---- sends the input to the actual Calculation Method.
                     
+
                     break;
                 case 2:
                     Console.Clear();
@@ -69,7 +74,7 @@ namespace ConsoleApp1
                 case 3:
                     Quit();
                     break;
-            } // <---- Switch Statement with refrences to the Calculate and ListHistory Classes depending on choice.
+            }                                                                        // <---- Switch Statement with refrences to the Calculate and ListHistory Classes depending on choice.
 
 
 

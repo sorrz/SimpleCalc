@@ -15,14 +15,15 @@ namespace ConsoleApp1
         public static void PrintOut(List<string> history)
         {
             
-            int j = 1;    // <-- Counter for History Numbering.
+            int j = 1;                                  // <-- Counter for History Numbering.
             string a = " ";
-            foreach (var item in history)   // <-- Printing each item in the List history with the prefixed Index.
+            foreach (var item in history)               // <-- Printing each item in the List history with the prefixed Index.
             {
                 Console.WriteLine(j + ": " + item);
                 j++;
             }
-            Program.Menu(history, null); // <- Return to Menu after printing is done.
+            Console.WriteLine("\n\n\n");
+            Program.Menu(history, null);                // <- Return to Menu after printing is done.
         }
     }
 }
